@@ -7,6 +7,7 @@ import { LocalAuthGuard } from 'src/core/guards/local-auth.guard';
 import { User as iUser } from 'src/user/user.schema';
 import { AddUserDTO } from './auth.dto';
 import { AuthService, AuthenticatedUser } from './auth.service';
+import { Roles } from 'src/core/decorators/roles.decorator';
 
 @Controller()
 export class AuthController {
