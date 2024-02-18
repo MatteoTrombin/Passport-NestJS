@@ -5,6 +5,11 @@ import { Types } from 'mongoose';
 
 export type UserDocument = HydratedDocument<User>;
 
+export enum Role {
+    Customer = 'customer',
+    Admin = 'admin'
+}
+
 @Schema({
     toJSON: {
         transform: function (doc, ret) {

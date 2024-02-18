@@ -4,6 +4,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from '../auth.service';
 import { User } from '@modules/user';
 import { ConfigService } from '@nestjs/config';
+import { Role } from '@modules/user-identity';
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
@@ -28,7 +29,8 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       const userPayload: User = {
         firstName: name.givenName,
         lastName: name.familyName,
-        picture: photos[0].value
+        picture: photos[0].value,
+        role: Role.Customer
       };
 
       const user = await this.authService.validateOAuthLogin(userPayload, emails[0].value);

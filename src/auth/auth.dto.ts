@@ -1,6 +1,6 @@
+import { Role } from "@modules/user-identity";
 import { IsEmail, IsString, IsUrl, Matches, MinLength } from "@nestjs/class-validator";
-import { IsIn } from "class-validator";
-import { Role } from "src/user/user.schema";
+import { IsEnum, IsIn } from "class-validator";
 
 export class AddUserDTO {
   @IsString()
@@ -16,7 +16,7 @@ export class AddUserDTO {
   username: string;
 
   @IsString()
-  @IsIn(Object.values(Role))
+  @IsEnum(Role)
   role: Role;
 
   @MinLength(8)

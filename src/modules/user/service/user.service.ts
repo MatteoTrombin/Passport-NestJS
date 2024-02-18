@@ -20,6 +20,6 @@ export class UserService extends UserAbstractService {
   }
 
   async create(user: User): Promise<User> {
-    return await this.userSchema.create(user);
+    return (await this.userSchema.create(user)).toObject();
   }
 }

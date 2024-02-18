@@ -4,10 +4,9 @@ import { Public } from 'src/core/decorators/is.public.decorator';
 import { User } from 'src/core/decorators/user.decorator';
 import { GoogleOAuthGuard } from 'src/core/guards/google-auth.guard';
 import { LocalAuthGuard } from 'src/core/guards/local-auth.guard';
-import { User as iUser } from 'src/user/user.schema';
 import { AddUserDTO } from './auth.dto';
-import { AuthService, AuthenticatedUser } from './auth.service';
-import { Roles } from 'src/core/decorators/roles.decorator';
+import { AuthService, AuthenticatedUser } from '@api/auth/auth.service';
+import { User as iUser } from '@modules/user';
 
 @Controller()
 export class AuthController {
