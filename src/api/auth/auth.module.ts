@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { UserModule } from 'src/user/user.module';
+import { UserModule } from '@modules/user';
 import { PassportModule } from '@nestjs/passport';
-import { LocalStrategy } from 'src/auth/strategies/local.strategy';
+import { LocalStrategy } from '@api/auth/strategies/local.strategy';
 import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from 'src/auth/strategies/jwt.strategy';
+import { JwtStrategy } from '@api/auth/strategies/jwt.strategy';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from 'src/core/guards/jwt-auth.guard';
-import { UserIdentityModule } from 'src/user-identity/user-identity.module';
-import { GoogleStrategy } from './strategies/google.strategy';
 import { ConfigService } from '@nestjs/config';
+import { UserIdentityModule } from '@modules/user-identity';
+import { GoogleStrategy } from './strategies/google.strategy';
 
 @Module({
   imports: [
@@ -24,7 +24,8 @@ import { ConfigService } from '@nestjs/config';
       }),
       inject: [ConfigService]
     }),
-    PassportModule.register({session: true})],
+    PassportModule.register({session: true})
+  ],
   providers: [
     AuthService, 
     LocalStrategy,
