@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
+import { UserAbstractService, UserModule, UserService } from '@modules/user';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserIdentityModule } from './user-identity/user-identity.module';
 import { ConfigModule } from '@nestjs/config'; 
+import { AuthModule } from '@api/auth/auth.module';
+import { UserIdentityAbstractService, UserIdentityModule, UserIdentityService } from '@modules/user-identity';
+
 @Module({
   imports: [
     AuthModule,
@@ -13,7 +14,12 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true,
       envFilePath: '.env'
     }),
-    UserModule,
+    UserModule.forRoot([
+      {provide: UserAbstractService, useClass: UserService}
+    ]),
+    UserIdentityModule.forRoot([
+      {provide: UserIdentityAbstractService, useClass: UserIdentityService}
+    ]),
     MongooseModule.forRoot('mongodb://127.0.0.1:27017/auth-test'),
     UserIdentityModule
   ],
